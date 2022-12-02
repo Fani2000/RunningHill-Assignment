@@ -1,21 +1,33 @@
 <div cdkDropListGroup>
   <!-- prettier-ignore -->
   <mat-card-title>Drag and drop words into the sentence section:</mat-card-title>
-  <mat-card>
+  <mat-card
+    cdkDropList
+    [cdkDropListData]="words"
+  >
       <div
-        matTooltip="Adjective"
-        class="word-chip" color="primary" *ngFor="let item of words" cdkDrag>
-        {{ item }}
+        matTooltip="{{item.type}}"
+        class="word-chip" color="primary" *ngFor="let item of words"  cdkDrag>
+        {{ item.word }}
       </div>
   </mat-card>
 
   <mat-card-title>sentence section:</mat-card-title>
 
-  <mat-card
+  <div
     cdkDropList
-    [cdkDropListData]="sentence"
+    [cdkDropListData]="constructedSentence"
     (cdkDropListDropped)="drop($event)"
+    class="drop-zone"
   >
-    <div class="correct" *ngFor="let word of sentence">{{ word }}</div>
-  </mat-card>
+    <div class="word-chip correct" *ngFor="let word of constructedSentence">{{ word.word }}</div>
+  </div>
+
+  <button 
+        mat-raised-button
+        color="primary"
+        (click)="onSubmitSentence()"
+        aria-label="Button that displays a tooltip when focused or hovered over">
+  Submit
+</button>
 </div>
