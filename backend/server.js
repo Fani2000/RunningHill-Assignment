@@ -29,6 +29,6 @@ app.use("/*", (req, res) => {
 
 
 app.listen(port, () => {
-    console.log(process.env.MONGO_URL)
-    console.log("APP RUNNING ON "+port)
+    // console.log(process.env.MONGO_URL)
+    console.log("APP RUNNING ON "+ port)
 })

@@ -7,11 +7,11 @@ Router.get("/words", async (req, res) => {
   try {
     const Words = await WordModel.find({});
     res.status = 200
-    if (Words.length > 0) res.json({ status: 200, words: Words });
-    else res.json({ status: 200, words: [] });
+    if (Words.length > 0) return res.json({ status: 200, words: Words });
+    else return res.json({ status: 200, words: [] });
   } catch (error) {
     res.status = 400
-    res.json({status: 400, error: error.message ?? error ?? "Failed to get the Words!"})
+    return res.json({status: 400, error: error.message ?? error ?? "Failed to get the Words!"})
   }
 });
 
