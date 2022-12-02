@@ -11,12 +11,12 @@ import { WordsServiceService } from 'src/app/services/words-service.service';
 
 export class DragSectionComponent implements OnInit {
   constructor(private wordsServices: WordsServiceService) {}
+  sentences: string[] = []
 
   ngOnInit(): void {
     this.wordsServices.getWords().subscribe((data) => {
-      console.log(data)
       data.forEach((w: {type: string, word: string}) => {
-        console.log(w)
+        // console.log(w)
         this.words.push({type: w.type, word: w.word})
       })
     })
@@ -26,13 +26,11 @@ export class DragSectionComponent implements OnInit {
   correctSentence: string = ""
 
   drop(event: CdkDragDrop<Word[]>){
-    // console.log(event.container, event.container.data.length)
    transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.container.data.length) 
   }
 
   onSubmitSentence(){
     const newSentence = this.constructedSentence.map(w => w.word).join(" ")
-    // console.log(this.wordsServices.getCorrectSentence(), newSentence)
-    this.wordsServices.submitSentence(newSentence)
+    this.wordsServices.submitSentence(newSentence + ".")
   }
 }

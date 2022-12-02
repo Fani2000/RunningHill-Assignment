@@ -15,13 +15,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';
+import { SubmitedSentencesComponent } from './components/submited-sentences/submited-sentences.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
     AppComponent,
     DragSectionComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SubmitedSentencesComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule ,
-    HttpClientModule
+    HttpClientModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -36,3 +36,7 @@ mat-card {
 .correct {
     background-color: green !important;
 }
+
+.title {
+    margin-top: 20px;
+}
