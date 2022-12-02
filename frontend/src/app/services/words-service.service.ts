@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class WordsServiceService {
   private _words: Word[] = [];
+  private _id: string = ""
   private words: Subject<Word[]> = new Subject<Word[]>();
   private sentences: Subject<string[]> = new Subject<string[]>();
   private correctSentence: string[] = [];
@@ -24,10 +25,11 @@ export class WordsServiceService {
     this.http
       .get<{
         status: Number;
-        words: [{ words: [{_id:string,_type: string, word: string}]; correctSentences: [string] }];
+        words: [{ words: [{_id:string,_type: string, word: string}]; correctSentences: [string], _id: string }];
       }>(`${this.apiBaseUrl}/words`)
       .subscribe((words) => {
         this.correctSentence = words.words[0].correctSentences;
+        this._id = words.words[0]._id;
         this._words = words.words[0].words.map((w) => {
           return {
             type: w._type,
@@ -42,5 +44,11 @@ export class WordsServiceService {
   submitSentence(sentence: string) {
     this._sentences.push(sentence);
     this.sentences.next([...this._sentences]);
+    this.http.post(`${this.apiBaseUrl}/sentences`, {
+      sentence: this._sentences,
+      id: this._id 
+    }).subscribe((data) => {
+      console.log(data)
+    })
   }
 }
