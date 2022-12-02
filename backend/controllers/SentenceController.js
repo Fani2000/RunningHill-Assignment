@@ -26,7 +26,7 @@ router
     if (sentence.length > 0 || (!sentence && !id)) {
       const word = await WordModel.find({ _id: id });
 
-      if (word[0].correctSentences.includes(sentence[0])) {
+      if (word[0].correctSentences.includes(sentence)) {
         isCorrect = true;
       }
     }
@@ -34,7 +34,7 @@ router
     try {
       SentenceModel.create({
         correct: isCorrect,
-        sentence: sentence[0],
+        sentence: sentence,
       });
 
       res.status = 200;
